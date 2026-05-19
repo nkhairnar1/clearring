@@ -55,8 +55,9 @@ COPY --from=builder /app/node_modules /app/node_modules
 # Built workspace packages
 COPY --from=builder /app/packages/config/dist       /app/packages/config/dist
 COPY --from=builder /app/packages/config/package.json /app/packages/config/package.json
-COPY --from=builder /app/packages/phone-utils/dist       /app/packages/phone-utils/dist
+COPY --from=builder /app/packages/phone-utils/dist        /app/packages/phone-utils/dist
 COPY --from=builder /app/packages/phone-utils/package.json /app/packages/phone-utils/package.json
+COPY --from=builder /app/packages/phone-utils/node_modules /app/packages/phone-utils/node_modules
 COPY --from=builder /app/packages/shared-types/dist       /app/packages/shared-types/dist
 COPY --from=builder /app/packages/shared-types/package.json /app/packages/shared-types/package.json
 COPY --from=builder /app/packages/spam-engine/dist       /app/packages/spam-engine/dist
