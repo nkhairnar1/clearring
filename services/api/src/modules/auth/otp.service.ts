@@ -57,7 +57,11 @@ export class OtpService {
   private async sendEmail(to: string, otp: string): Promise<boolean> {
     const subject = 'Your ClearRing verification code';
     const html = this.emailHtml(otp);
-    const from = process.env.EMAIL_FROM ?? 'ClearRing <onboarding@resend.dev>';
+    const from =
+      process.env.EMAIL_FROM ??
+      (process.env.EMAIL_USER
+        ? `ClearRing <${process.env.EMAIL_USER}>`
+        : 'ClearRing <onboarding@resend.dev>');
 
     if (this.resend) {
       try {
