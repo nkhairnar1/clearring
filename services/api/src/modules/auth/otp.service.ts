@@ -58,6 +58,7 @@ export class OtpService {
 
     if (this.brevoApiKey) {
       try {
+        this.logger.log(`Attempting Brevo API send to ${to} from ${this.brevoSender}`);
         const res = await fetch('https://api.brevo.com/v3/smtp/email', {
           method: 'POST',
           headers: {
@@ -72,14 +73,16 @@ export class OtpService {
             htmlContent: html,
           }),
         });
-        if (!res.ok) {
-          const body = await res.text();
-          throw new Error(`${res.status} ${body}`);
-        }
+        const body = await res.text();
+        this.logger.log(`Brevo API response: ${res.status} ${body}`);
+        if (!res.ok) throw new Error(`${res.status} ${body}`);
         this.logger.log(`OTP email sent via Brevo API to ${to}`);
         return true;
       } catch (err: unknown) {
-        this.logger.error(`Brevo API failed: ${err instanceof Error ? err.message : String(err)}`);
+        const msg = err instanceof Error
+          ? `${err.name}: ${err.message || '(empty)'}`
+          : JSON.stringify(err);
+        this.logger.error(`Brevo API failed: ${msg}`);
         return false;
       }
     }
@@ -106,6 +109,9 @@ export class OtpService {
 
     // Fire email in background — OTP is already in Redis, client gets fast 200.
     this.sendEmail(email, otp).catch(() => {});
+
+    // TEMP: log OTP so it's visible in Railway logs during email debugging
+    this.logger.warn(`[DEBUG] OTP for ${email} = ${otp}`);
 
     if (this.isDev) {
       this.logger.debug(`[DEV] OTP for ${email}: ${otp}`);
