@@ -16,6 +16,7 @@ RUN pnpm install --frozen-lockfile
 
 # ---- Stage 2: Build ----
 FROM node:20-alpine AS builder
+RUN apk add --no-cache openssl
 RUN corepack enable && corepack prepare pnpm@10 --activate
 WORKDIR /app
 
@@ -42,6 +43,7 @@ RUN pnpm --filter @clearring/api build
 
 # ---- Stage 3: Production image ----
 FROM node:20-alpine AS runner
+RUN apk add --no-cache openssl
 RUN corepack enable && corepack prepare pnpm@10 --activate
 WORKDIR /app/services/api
 
