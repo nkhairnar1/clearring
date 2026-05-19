@@ -37,19 +37,23 @@ export class OtpService {
   private async sendEmail(to: string, otp: string): Promise<boolean> {
     if (!this.transporter) return false;
     try {
-      await this.transporter.sendMail({
+      const sendPromise = this.transporter.sendMail({
         from: `"ClearRing" <${process.env.EMAIL_USER}>`,
         to,
         subject: 'Your ClearRing verification code',
         html: `
           <div style="font-family:sans-serif;max-width:400px;margin:auto;padding:32px;background:#0F172A;color:#fff;border-radius:12px">
-            <h2 style="margin:0 0 8px">🛡️ ClearRing</h2>
+            <h2 style="margin:0 0 8px">ClearRing</h2>
             <p style="color:#94A3B8;margin:0 0 24px">Your verification code</p>
             <div style="font-size:40px;font-weight:900;letter-spacing:12px;color:#3B82F6;margin:24px 0">${otp}</div>
             <p style="color:#64748B;font-size:13px">Valid for 5 minutes. Never share this code.</p>
           </div>
         `,
       });
+      const timeout = new Promise<never>((_, reject) =>
+        setTimeout(() => reject(new Error('SMTP timeout')), 10_000),
+      );
+      await Promise.race([sendPromise, timeout]);
       this.logger.log(`OTP email sent to ${to}`);
       return true;
     } catch (err: unknown) {
@@ -63,13 +67,15 @@ export class OtpService {
     const otp = this.generateOtp();
     await this.redis.setex(this.otpKey(email), this.OTP_TTL, otp);
 
-    const sent = await this.sendEmail(email, otp);
+    // Fire email in background — don't block the HTTP response.
+    // The OTP is already stored in Redis; the client just needs a fast 200.
+    this.sendEmail(email, otp).catch(() => {});
 
     if (this.isDev) {
       this.logger.debug(`[DEV] OTP for ${email}: ${otp}`);
       return { sent: true, devOtp: otp };
     }
-    return { sent: sent || true };
+    return { sent: true };
   }
 
   async verifyOtp(email: string, otp: string): Promise<boolean> {
