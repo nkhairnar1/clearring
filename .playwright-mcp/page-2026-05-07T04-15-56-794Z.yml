@@ -1,0 +1,614 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e4]:
+      - link "ClearRing" [ref=e5] [cursor=pointer]:
+        - /url: "#"
+        - img [ref=e7]
+        - generic [ref=e9]: ClearRing
+      - generic [ref=e10]:
+        - link "Features" [ref=e11] [cursor=pointer]:
+          - /url: "#app-screens"
+        - link "How It Works" [ref=e12] [cursor=pointer]:
+          - /url: "#how-it-works"
+        - link "For Business" [ref=e13] [cursor=pointer]:
+          - /url: "#business"
+        - link "FAQ" [ref=e14] [cursor=pointer]:
+          - /url: "#faq"
+      - button "Get Early Access" [ref=e16] [cursor=pointer]:
+        - text: Get Early Access
+        - img [ref=e17]
+  - main [ref=e19]:
+    - generic [ref=e23]:
+      - generic [ref=e24]:
+        - generic [ref=e26]:
+          - img [ref=e27]
+          - text: Community-powered caller intelligence
+        - heading "Know who's calling before you answer." [level=1] [ref=e29]:
+          - text: Know who's calling
+          - text: before you answer.
+        - paragraph [ref=e30]: Real-time spam detection, business verification, and community intelligence — all before you pick up the phone.
+        - generic [ref=e31]:
+          - button "Get Early Access" [ref=e32] [cursor=pointer]:
+            - text: Get Early Access
+            - img [ref=e33]
+          - link "See the App" [ref=e35] [cursor=pointer]:
+            - /url: "#app-screens"
+            - img [ref=e36]
+            - text: See the App
+        - generic [ref=e39]:
+          - generic [ref=e40]:
+            - img [ref=e41]
+            - text: Privacy first
+          - generic [ref=e43]:
+            - img [ref=e44]
+            - text: No ads, ever
+          - generic [ref=e47]:
+            - img [ref=e48]
+            - text: Free to use
+        - generic [ref=e50]:
+          - generic [ref=e51]:
+            - generic [ref=e52]: 1B+
+            - generic [ref=e53]: Calls Analyzed
+          - generic [ref=e54]:
+            - generic [ref=e55]: 98%
+            - generic [ref=e56]: Accuracy
+          - generic [ref=e57]:
+            - generic [ref=e58]: <50ms
+            - generic [ref=e59]: Response Time
+      - generic [ref=e61]:
+        - generic [ref=e63]: Spam Blocked
+        - generic [ref=e65]:
+          - img [ref=e66]
+          - text: Verified Safe
+        - generic [ref=e69]: "Score: 88"
+        - generic [ref=e70]:
+          - generic [ref=e72]: 9:41
+          - generic [ref=e80]:
+            - generic [ref=e81]:
+              - img [ref=e83]
+              - generic [ref=e86]: ClearRing
+            - generic [ref=e87]:
+              - img [ref=e88]
+              - generic [ref=e91]: Search any number...
+            - generic [ref=e92]: Recent Lookups
+            - generic [ref=e93]:
+              - generic [ref=e96]: +91 98765 43210
+              - generic [ref=e97]: HIGH RISK
+            - generic [ref=e98]:
+              - generic [ref=e101]: +91 44 2233 4455
+              - generic [ref=e102]: VERIFIED
+            - generic [ref=e103]:
+              - generic [ref=e106]: +91 99001 12233
+              - generic [ref=e107]: LIKELY SPAM
+            - generic [ref=e108]:
+              - generic [ref=e109]:
+                - generic [ref=e110]: "142"
+                - generic [ref=e111]: Blocked
+              - generic [ref=e112]:
+                - generic [ref=e113]: "38"
+                - generic [ref=e114]: Reports
+              - generic [ref=e115]:
+                - generic [ref=e116]: "5"
+                - generic [ref=e117]: Verified
+          - generic [ref=e120]:
+            - button [ref=e121] [cursor=pointer]
+            - button [ref=e122] [cursor=pointer]
+            - button [ref=e123] [cursor=pointer]
+    - generic [ref=e126]:
+      - generic [ref=e127]:
+        - generic [ref=e128]: The Problem
+        - heading "The phone call is broken" [level=2] [ref=e129]
+        - paragraph [ref=e130]: Spam, fraud, and robocalls have destroyed trust in one of communication's most fundamental tools.
+      - generic [ref=e131]:
+        - generic [ref=e132]:
+          - img [ref=e134]
+          - generic [ref=e137]: 74%
+          - generic [ref=e138]: of people ignore unknown calls
+          - generic [ref=e139]: Missed deliveries, bank calls, medical appointments — all lost to spam fear.
+        - generic [ref=e140]:
+          - img [ref=e142]
+          - generic [ref=e144]: ₹7,200 Cr
+          - generic [ref=e145]: lost to phone fraud in India annually
+          - generic [ref=e146]: UPI scams, fake loan calls, and OTP phishing cause devastating financial damage.
+        - generic [ref=e147]:
+          - img [ref=e149]
+          - generic [ref=e154]: 3.4B
+          - generic [ref=e155]: spam calls made globally per month
+          - generic [ref=e156]: Robocalls and scam operations run at industrial scale with zero accountability.
+        - generic [ref=e157]:
+          - img [ref=e159]
+          - generic [ref=e162]: 46%
+          - generic [ref=e163]: drop in answer rates since 2018
+          - generic [ref=e164]: Legitimate businesses suffer because fraudsters poisoned the phone ecosystem.
+    - generic [ref=e166]:
+      - generic [ref=e167]:
+        - heading "ClearRing's Approach" [level=2] [ref=e168]
+        - paragraph [ref=e169]: Four pillars of trust — working together to give you clarity before every call.
+      - generic [ref=e170]:
+        - generic [ref=e171]:
+          - img [ref=e173]
+          - generic [ref=e178]:
+            - heading "Community Intelligence" [level=3] [ref=e179]
+            - paragraph [ref=e180]: Millions of reports from real users create a continuously updated threat map of spam numbers.
+        - generic [ref=e181]:
+          - img [ref=e183]
+          - generic [ref=e186]:
+            - heading "Business Verification" [level=3] [ref=e187]
+            - paragraph [ref=e188]: Legitimate businesses get verified badges so you can answer with confidence.
+        - generic [ref=e189]:
+          - img [ref=e191]
+          - generic [ref=e193]:
+            - heading "Instant Lookup" [level=3] [ref=e194]
+            - paragraph [ref=e195]: Sub-100ms responses powered by Redis caching and an optimized scoring engine.
+        - generic [ref=e196]:
+          - img [ref=e198]
+          - generic [ref=e201]:
+            - heading "Global Ready" [level=3] [ref=e202]
+            - paragraph [ref=e203]: E.164 normalization supports every country code. Designed for India, built for the world.
+    - generic [ref=e205]:
+      - generic [ref=e206]:
+        - generic [ref=e207]: The App
+        - heading "Every screen, beautifully crafted" [level=2] [ref=e208]
+        - paragraph [ref=e209]: Clean, fast, and purposeful. Designed around the moments that matter most.
+      - generic [ref=e210]:
+        - generic [ref=e214]:
+          - generic [ref=e216]: 9:41
+          - generic [ref=e224]:
+            - generic [ref=e225]:
+              - generic [ref=e226]:
+                - generic [ref=e227]: Good morning
+                - generic [ref=e228]: Stay safe today
+              - img [ref=e230]
+            - generic [ref=e232]:
+              - img [ref=e233]
+              - generic [ref=e236]: Search any number...
+            - generic [ref=e237]: Recent Lookups
+            - generic [ref=e238]:
+              - generic [ref=e241]: +91 98765 43210
+              - generic [ref=e242]: HIGH RISK
+            - generic [ref=e243]:
+              - generic [ref=e246]: +91 44 2233 4455
+              - generic [ref=e247]: VERIFIED
+            - generic [ref=e248]:
+              - generic [ref=e251]: +91 99001 12233
+              - generic [ref=e252]: LIKELY SPAM
+            - generic [ref=e253]:
+              - generic [ref=e254]:
+                - generic [ref=e255]: "142"
+                - generic [ref=e256]: Blocked
+              - generic [ref=e257]:
+                - generic [ref=e258]: "38"
+                - generic [ref=e259]: Reports
+              - generic [ref=e260]:
+                - generic [ref=e261]: "5"
+                - generic [ref=e262]: Safe
+        - generic [ref=e265]:
+          - generic [ref=e266]:
+            - generic [ref=e267]: Instant number lookup with one tap
+            - paragraph [ref=e268]: Search any number and get a complete risk profile in milliseconds. Recent lookups, blocked numbers, and community stats — all on your home screen.
+          - button "Home" [ref=e269] [cursor=pointer]:
+            - img [ref=e271]
+            - generic [ref=e275]: Home
+          - button "Lookup Result" [ref=e277] [cursor=pointer]:
+            - img [ref=e279]
+            - generic [ref=e282]: Lookup Result
+          - button "Incoming Call" [ref=e283] [cursor=pointer]:
+            - img [ref=e285]
+            - generic [ref=e288]: Incoming Call
+          - button "Report" [ref=e289] [cursor=pointer]:
+            - img [ref=e291]
+            - generic [ref=e294]: Report
+          - button "Business Claim" [ref=e295] [cursor=pointer]:
+            - img [ref=e297]
+            - generic [ref=e302]: Business Claim
+          - button "Themes" [ref=e303] [cursor=pointer]:
+            - img [ref=e305]
+            - generic [ref=e309]: Themes
+    - generic [ref=e312]:
+      - generic [ref=e313]:
+        - generic [ref=e314]: Intelligence Cards
+        - heading "Clarity at a glance" [level=2] [ref=e315]
+        - paragraph [ref=e316]: Every number gets a risk score, community intel, and verified status — displayed in a beautiful caller card.
+      - generic [ref=e317]:
+        - generic [ref=e318] [cursor=pointer]:
+          - generic [ref=e320]:
+            - img [ref=e321]
+            - generic [ref=e324]:
+              - img [ref=e325]
+              - generic [ref=e327]: "88"
+          - generic [ref=e329]: HIGH RISK
+          - generic [ref=e330]:
+            - generic [ref=e331]: Loan Shark Calls
+            - generic [ref=e332]: +91 98765 43210
+          - generic [ref=e333]:
+            - generic [ref=e334]: Money requested
+            - generic [ref=e336]: OTP requested
+            - generic [ref=e338]: 23 reports
+        - generic [ref=e339] [cursor=pointer]:
+          - generic [ref=e341]:
+            - img [ref=e342]
+            - generic [ref=e345]:
+              - img [ref=e346]
+              - generic [ref=e349]: "2"
+          - generic [ref=e351]: VERIFIED
+          - generic [ref=e352]:
+            - generic [ref=e353]: Apollo Hospitals
+            - generic [ref=e354]: +91 44 2233 4455
+          - generic [ref=e355]:
+            - generic [ref=e356]: Identity confirmed
+            - generic [ref=e358]: Admin verified
+        - generic [ref=e360] [cursor=pointer]:
+          - generic [ref=e362]:
+            - img [ref=e363]
+            - generic [ref=e366]:
+              - img [ref=e367]
+              - generic [ref=e369]: "72"
+          - generic [ref=e371]: LIKELY SPAM
+          - generic [ref=e372]:
+            - generic [ref=e373]: Credit Card Sales
+            - generic [ref=e374]: +91 99001 12233
+          - generic [ref=e375]:
+            - generic [ref=e376]: Telemarketing
+            - generic [ref=e378]: Persistent calls
+            - generic [ref=e380]: 11 reports
+        - generic [ref=e381] [cursor=pointer]:
+          - generic [ref=e383]:
+            - img [ref=e384]
+            - generic [ref=e387]:
+              - img [ref=e388]
+              - generic [ref=e390]: "50"
+          - generic [ref=e392]: UNKNOWN
+          - generic [ref=e393]:
+            - generic [ref=e394]: Unknown Caller
+            - generic [ref=e395]: +91 91000 00001
+          - generic [ref=e397]: No community data
+      - generic [ref=e400]:
+        - generic [ref=e401]:
+          - img [ref=e403]
+          - generic [ref=e409]: 0+
+          - generic [ref=e410]: Community Reports
+        - generic [ref=e411]:
+          - img [ref=e413]
+          - generic [ref=e417]: 0%
+          - generic [ref=e418]: Detection Accuracy
+        - generic [ref=e419]:
+          - img [ref=e421]
+          - generic [ref=e425]: 0+
+          - generic [ref=e426]: Numbers Verified
+        - generic [ref=e427]:
+          - img [ref=e429]
+          - generic [ref=e433]: 0ms
+          - generic [ref=e434]: Avg. Response Time
+    - generic [ref=e437]:
+      - generic [ref=e438]:
+        - generic [ref=e439]: How It Works
+        - heading "Four steps to a safer call" [level=2] [ref=e440]
+        - paragraph [ref=e441]: From unknown ring to informed decision in under 50 milliseconds.
+      - generic [ref=e443]:
+        - generic [ref=e444]:
+          - generic [ref=e445]:
+            - img [ref=e447]
+            - generic [ref=e449]: "1"
+          - generic [ref=e450]:
+            - generic [ref=e451]: "01"
+            - heading "Call Arrives" [level=3] [ref=e452]
+            - paragraph [ref=e453]: An incoming call triggers ClearRing automatically. No manual action needed — it runs silently in the background.
+            - generic [ref=e454]: Works with Android's native CallScreeningService API.
+        - generic [ref=e455]:
+          - generic [ref=e456]:
+            - img [ref=e458]
+            - generic [ref=e460]: "2"
+          - generic [ref=e461]:
+            - generic [ref=e462]: "02"
+            - heading "Instant Lookup" [level=3] [ref=e463]
+            - paragraph [ref=e464]: The number is checked against millions of community reports — cached in Redis for sub-50ms response times.
+            - generic [ref=e465]: Redis cache with 1-hour TTL for repeat lookups.
+        - generic [ref=e466]:
+          - generic [ref=e467]:
+            - img [ref=e469]
+            - generic [ref=e471]: "3"
+          - generic [ref=e472]:
+            - generic [ref=e473]: "03"
+            - heading "Score Computed" [level=3] [ref=e474]
+            - paragraph [ref=e475]: Our weighted spam engine calculates a 0–100 risk score using report type, recency, reporter trust, and fraud signals.
+            - generic [ref=e476]: FRAUD=35pts, SCAM=25pts, recency 1.5× multiplier.
+        - generic [ref=e477]:
+          - generic [ref=e478]:
+            - img [ref=e480]
+            - generic [ref=e483]: "4"
+          - generic [ref=e484]:
+            - generic [ref=e485]: "04"
+            - heading "You Decide" [level=3] [ref=e486]
+            - paragraph [ref=e487]: See the caller's identity, risk level, and community notes — with full context to decide with confidence.
+            - generic [ref=e488]: Verified businesses show name, badge, and call purpose.
+    - generic [ref=e491]:
+      - generic [ref=e492]:
+        - generic [ref=e493]:
+          - img [ref=e494]
+          - generic [ref=e497]: For Business
+        - heading "Make Every Call Count" [level=2] [ref=e498]
+        - paragraph [ref=e499]: When your number appears as VERIFIED on ClearRing, customers answer with confidence. Claim your business, define your call purposes, and rebuild trust in your outreach.
+        - generic [ref=e500]:
+          - generic [ref=e501]:
+            - img [ref=e503]
+            - generic [ref=e506]:
+              - generic [ref=e507]: Verified Badge
+              - generic [ref=e508]: Show callers your business is legitimate before they pick up.
+          - generic [ref=e509]:
+            - img [ref=e511]
+            - generic [ref=e514]:
+              - generic [ref=e515]: Higher Answer Rates
+              - generic [ref=e516]: Verified numbers see 3-5x more answered calls.
+          - generic [ref=e517]:
+            - img [ref=e519]
+            - generic [ref=e524]:
+              - generic [ref=e525]: Dispute Resolution
+              - generic [ref=e526]: Flag incorrect reports and get your number cleared fast.
+          - generic [ref=e527]:
+            - img [ref=e529]
+            - generic [ref=e531]:
+              - generic [ref=e532]: Call Reason Labels
+              - generic [ref=e533]: Tell people why you call — "Delivery Confirmation", "Appointment Reminder", etc.
+      - generic [ref=e534]:
+        - generic [ref=e535]:
+          - img [ref=e537]
+          - heading "Verification Process" [level=3] [ref=e540]
+          - paragraph [ref=e541]: Simple 3-step verification
+        - generic [ref=e542]:
+          - generic [ref=e543]:
+            - generic [ref=e544]: "1"
+            - generic [ref=e545]:
+              - generic [ref=e546]: Claim Your Number
+              - generic [ref=e547]: Search your business number and submit a claim
+          - generic [ref=e548]:
+            - generic [ref=e549]: "2"
+            - generic [ref=e550]:
+              - generic [ref=e551]: Provide Documentation
+              - generic [ref=e552]: Upload business registration or utility bill
+          - generic [ref=e553]:
+            - generic [ref=e554]: "3"
+            - generic [ref=e555]:
+              - generic [ref=e556]: Get Verified
+              - generic [ref=e557]: Admin reviews and activates your verified badge in 24-48 hours
+    - generic [ref=e560]:
+      - generic [ref=e561]:
+        - generic [ref=e562]: Community
+        - heading "Trusted by people like you" [level=2] [ref=e563]
+        - paragraph [ref=e564]: Real users. Real protection. Real results.
+      - generic [ref=e565]:
+        - generic [ref=e566]:
+          - generic [ref=e567]:
+            - img [ref=e568]
+            - img [ref=e570]
+            - img [ref=e572]
+            - img [ref=e574]
+            - img [ref=e576]
+          - img [ref=e578]
+          - paragraph [ref=e581]: I used to ignore every unknown call. Now I answer the ones that matter and block the rest before they even ring. ClearRing is genuinely life-changing.
+          - generic [ref=e582]:
+            - generic [ref=e583]: PM
+            - generic [ref=e584]:
+              - generic [ref=e585]: Priya M.
+              - generic [ref=e586]: Software Engineer, Bengaluru
+        - generic [ref=e587]:
+          - generic [ref=e588]:
+            - img [ref=e589]
+            - img [ref=e591]
+            - img [ref=e593]
+            - img [ref=e595]
+            - img [ref=e597]
+          - img [ref=e599]
+          - paragraph [ref=e602]: Our hospital's outreach team saw call answer rates jump 3x after getting verified. Patients now see our name and badge — they pick up without hesitation.
+          - generic [ref=e603]:
+            - generic [ref=e604]: RK
+            - generic [ref=e605]:
+              - generic [ref=e606]: Dr. Rajan K.
+              - generic [ref=e607]: Apollo Hospitals, Chennai
+        - generic [ref=e608]:
+          - generic [ref=e609]:
+            - img [ref=e610]
+            - img [ref=e612]
+            - img [ref=e614]
+            - img [ref=e616]
+            - img [ref=e618]
+          - img [ref=e620]
+          - paragraph [ref=e623]: My elderly parents kept getting scam calls asking for OTPs. After installing ClearRing, those calls get flagged before they even hear the ring.
+          - generic [ref=e624]:
+            - generic [ref=e625]: AT
+            - generic [ref=e626]:
+              - generic [ref=e627]: Arjun T.
+              - generic [ref=e628]: Business Owner, Mumbai
+        - generic [ref=e629]:
+          - generic [ref=e630]:
+            - img [ref=e631]
+            - img [ref=e633]
+            - img [ref=e635]
+            - img [ref=e637]
+            - img [ref=e639]
+          - img [ref=e641]
+          - paragraph [ref=e644]: I submitted a dispute when my business number was wrongly flagged as spam. The team resolved it in 24 hours and my score went from 68 to 8. Incredible.
+          - generic [ref=e645]:
+            - generic [ref=e646]: KR
+            - generic [ref=e647]:
+              - generic [ref=e648]: Kavya R.
+              - generic [ref=e649]: Founder, Bangalore Startup
+        - generic [ref=e650]:
+          - generic [ref=e651]:
+            - img [ref=e652]
+            - img [ref=e654]
+            - img [ref=e656]
+            - img [ref=e658]
+            - img [ref=e660]
+          - img [ref=e662]
+          - paragraph [ref=e665]: The spam engine is uncanny. It flagged a number I'd never seen before — and the moment I looked it up, I saw 14 fraud reports from that same week.
+          - generic [ref=e666]:
+            - generic [ref=e667]: SN
+            - generic [ref=e668]:
+              - generic [ref=e669]: Suresh N.
+              - generic [ref=e670]: IT Professional, Hyderabad
+        - generic [ref=e671]:
+          - generic [ref=e672]:
+            - img [ref=e673]
+            - img [ref=e675]
+            - img [ref=e677]
+            - img [ref=e679]
+            - img [ref=e681]
+          - img [ref=e683]
+          - paragraph [ref=e686]: Crystal Glass theme is stunning. But beyond looks — the scoring logic is actually thoughtful. It explains WHY a number is risky, not just that it is.
+          - generic [ref=e687]:
+            - generic [ref=e688]: MS
+            - generic [ref=e689]:
+              - generic [ref=e690]: Meera S.
+              - generic [ref=e691]: UX Designer, Pune
+    - generic [ref=e693]:
+      - generic [ref=e694]:
+        - heading "Privacy First" [level=2] [ref=e695]
+        - paragraph [ref=e696]: Protecting you from spam shouldn't require us to invade your privacy. So we don't.
+      - generic [ref=e697]:
+        - generic [ref=e698]:
+          - img [ref=e700]
+          - generic [ref=e703]:
+            - heading "You Control Permissions" [level=3] [ref=e704]
+            - paragraph [ref=e705]: ClearRing never silently reads your calls. Every permission is explained plainly before being requested.
+        - generic [ref=e706]:
+          - img [ref=e708]
+          - generic [ref=e711]:
+            - heading "No Call Recording" [level=3] [ref=e712]
+            - paragraph [ref=e713]: We classify numbers using metadata — never call content. Your conversations stay private.
+        - generic [ref=e714]:
+          - img [ref=e716]
+          - generic [ref=e725]:
+            - heading "Phone Auth Only" [level=3] [ref=e726]
+            - paragraph [ref=e727]: No email, no password, no tracking across apps. Your phone number is your identity — nothing more.
+        - generic [ref=e728]:
+          - img [ref=e730]
+          - generic [ref=e733]:
+            - heading "Data Minimization" [level=3] [ref=e734]
+            - paragraph [ref=e735]: Lookup logs are hashed and purged after 90 days. We store only what's needed to protect you.
+    - generic [ref=e737]:
+      - heading "Frequently Asked Questions" [level=2] [ref=e739]
+      - generic [ref=e740]:
+        - generic [ref=e741]:
+          - button "How does ClearRing identify spam calls?" [ref=e742] [cursor=pointer]:
+            - generic [ref=e743]: How does ClearRing identify spam calls?
+            - img [ref=e744]
+          - generic [ref=e746]: ClearRing uses a community-powered weighted scoring algorithm. When users report a number as spam, fraud, or scam, each report contributes to the number's spam score based on report type and recency. Admin-verified numbers get overrides for maximum accuracy.
+        - button "Does ClearRing work without internet?" [ref=e748] [cursor=pointer]:
+          - generic [ref=e749]: Does ClearRing work without internet?
+          - img [ref=e750]
+        - button "Can I report a false positive?" [ref=e753] [cursor=pointer]:
+          - generic [ref=e754]: Can I report a false positive?
+          - img [ref=e755]
+        - button "Is my call history shared with anyone?" [ref=e758] [cursor=pointer]:
+          - generic [ref=e759]: Is my call history shared with anyone?
+          - img [ref=e760]
+        - button "How do I get my business number verified?" [ref=e763] [cursor=pointer]:
+          - generic [ref=e764]: How do I get my business number verified?
+          - img [ref=e765]
+        - button "What countries does ClearRing support?" [ref=e768] [cursor=pointer]:
+          - generic [ref=e769]: What countries does ClearRing support?
+          - img [ref=e770]
+        - button "Is ClearRing free?" [ref=e773] [cursor=pointer]:
+          - generic [ref=e774]: Is ClearRing free?
+          - img [ref=e775]
+        - button "How is the spam score calculated?" [ref=e778] [cursor=pointer]:
+          - generic [ref=e779]: How is the spam score calculated?
+          - img [ref=e780]
+    - generic [ref=e788]:
+      - img [ref=e790]
+      - generic [ref=e792]: Available Now
+      - heading "Start protecting your calls today" [level=2] [ref=e793]
+      - paragraph [ref=e794]: Join thousands of users who answer every call with confidence. Free, private, and community-powered.
+      - generic [ref=e795]:
+        - generic [ref=e796]:
+          - img [ref=e797]
+          - text: Free forever for personal use
+        - generic [ref=e800]:
+          - img [ref=e801]
+          - text: No ads, no data selling
+        - generic [ref=e804]:
+          - img [ref=e805]
+          - text: Privacy-first by design
+        - generic [ref=e808]:
+          - img [ref=e809]
+          - text: Works on any Android phone
+      - generic [ref=e812]:
+        - button "Get Early Access" [ref=e813] [cursor=pointer]:
+          - img [ref=e814]
+          - text: Get Early Access
+          - img [ref=e817]
+        - link "Explore the App" [ref=e819] [cursor=pointer]:
+          - /url: "#app-screens"
+          - img [ref=e820]
+          - text: Explore the App
+      - paragraph [ref=e822]: Android app available. iOS coming soon. API access for developers.
+  - contentinfo [ref=e823]:
+    - generic [ref=e825]:
+      - generic [ref=e826]:
+        - generic [ref=e827]:
+          - generic [ref=e828]:
+            - img [ref=e830]
+            - generic [ref=e832]: ClearRing
+          - paragraph [ref=e833]: Know who's calling before you answer. Community-powered caller intelligence for everyone.
+          - generic [ref=e834]:
+            - link "Twitter" [ref=e835] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e836]
+            - link "LinkedIn" [ref=e838] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e839]
+            - link "GitHub" [ref=e843] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e844]
+            - link "Email" [ref=e847] [cursor=pointer]:
+              - /url: mailto:hello@clearring.app
+              - img [ref=e848]
+        - generic [ref=e851]:
+          - heading "Product" [level=4] [ref=e852]
+          - list [ref=e853]:
+            - listitem [ref=e854]:
+              - link "How It Works" [ref=e855] [cursor=pointer]:
+                - /url: "#how-it-works"
+            - listitem [ref=e856]:
+              - link "Features" [ref=e857] [cursor=pointer]:
+                - /url: "#app-screens"
+            - listitem [ref=e858]:
+              - link "For Business" [ref=e859] [cursor=pointer]:
+                - /url: "#business"
+            - listitem [ref=e860]:
+              - link "Pricing" [ref=e861] [cursor=pointer]:
+                - /url: "#"
+        - generic [ref=e862]:
+          - heading "Company" [level=4] [ref=e863]
+          - list [ref=e864]:
+            - listitem [ref=e865]:
+              - link "About" [ref=e866] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e867]:
+              - link "Blog" [ref=e868] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e869]:
+              - link "Careers" [ref=e870] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e871]:
+              - link "Contact" [ref=e872] [cursor=pointer]:
+                - /url: "#"
+        - generic [ref=e873]:
+          - heading "Legal" [level=4] [ref=e874]
+          - list [ref=e875]:
+            - listitem [ref=e876]:
+              - link "Privacy Policy" [ref=e877] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e878]:
+              - link "Terms of Service" [ref=e879] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e880]:
+              - link "Cookie Policy" [ref=e881] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e882]:
+              - link "GDPR" [ref=e883] [cursor=pointer]:
+                - /url: "#"
+      - generic [ref=e884]:
+        - paragraph [ref=e885]: © 2026 ClearRing. All rights reserved.
+        - generic [ref=e886]: All systems operational
+        - paragraph [ref=e888]: Made with care for safer calling in India 🇮🇳

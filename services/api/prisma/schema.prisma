@@ -1,0 +1,366 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  USER
+  BUSINESS_OWNER
+  MODERATOR
+  ADMIN
+  SUPER_ADMIN
+}
+
+enum RiskLevel {
+  SAFE
+  LOW_RISK
+  CAUTION
+  LIKELY_SPAM
+  HIGH_RISK
+}
+
+enum CallerCategory {
+  PERSONAL
+  BUSINESS
+  DELIVERY
+  BANK
+  PAYMENT_UPI
+  LOAN_FINANCE
+  INSURANCE
+  CREDIT_CARD_SALES
+  TELEMARKETING
+  REAL_ESTATE
+  JOB_RECRUITMENT
+  SCHOOL_EDUCATION
+  HOSPITAL_CLINIC
+  GOVERNMENT
+  UTILITY_SERVICES
+  COURIER
+  CAB_RIDE_SHARING
+  ECOMMERCE
+  POLITICAL_CAMPAIGN
+  SURVEY
+  FRAUD
+  SCAM
+  HARASSMENT
+  SPAM
+  UNKNOWN
+}
+
+enum ReportType {
+  SPAM
+  FRAUD
+  SCAM
+  HARASSMENT
+  TELEMARKETING
+  ROBOCALL
+  SILENT_CALL
+  FAKE_BANK
+  OTP_SCAM
+  PAYMENT_SCAM
+  JOB_SCAM
+  SAFE
+  WRONG_NUMBER
+}
+
+enum VerificationType {
+  NONE
+  COMMUNITY
+  DOCUMENT
+  ADMIN
+  OFFICIAL
+}
+
+enum SourceType {
+  COMMUNITY
+  ADMIN
+  OFFICIAL
+  BUSINESS_CLAIM
+  UNKNOWN
+}
+
+enum AdminOverrideStatus {
+  NONE
+  CONFIRMED_FRAUD
+  VERIFIED_SAFE
+  UNDER_REVIEW
+}
+
+enum DisputeStatus {
+  NONE
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum BusinessVerificationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  SUSPENDED
+}
+
+enum ReportStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum DisputeType {
+  WRONG_LABEL
+  WRONG_CATEGORY
+  PERSONAL_NUMBER
+  BUSINESS_NUMBER
+  OTHER
+}
+
+enum AppTheme {
+  CRYSTAL_GLASS
+  MIDNIGHT_TRUST
+  CLEAN_LIGHT
+  HIGH_CONTRAST
+  TRUE_SIGNAL
+}
+
+enum Platform {
+  ANDROID
+  WEB
+  ADMIN
+}
+
+model User {
+  id          String   @id @default(cuid())
+  email       String   @unique
+  phoneNumber String?  @unique @map("phone_number")
+  countryCode String   @default("IN") @map("country_code")
+  name        String?
+  role        UserRole @default(USER)
+  trustScore  Int      @default(50) @map("trust_score")
+  language    String   @default("en")
+  theme       AppTheme @default(CRYSTAL_GLASS)
+  city        String?
+  state       String?
+  country     String?  @default("IN")
+  isActive    Boolean  @default(true) @map("is_active")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  reports           NumberReport[]
+  blockedNumbers    BlockedNumber[]
+  disputes          Dispute[]
+  auditLogsAsActor  AuditLog[]
+  lookupLogs        LookupLog[]
+  businessProfiles  BusinessProfile[] @relation("ClaimedBy")
+  approvedProfiles  BusinessProfile[] @relation("ApprovedBy")
+  approvedReports   NumberReport[]    @relation("ApprovedBy")
+  reviewedDisputes  Dispute[]         @relation("ReviewedBy")
+  themePreferences  ThemePreference[]
+  approvedUsers     User[]            @relation("ApprovedUsers")
+  approvedByAdmin   User?             @relation("ApprovedUsers", fields: [approvedByAdminId], references: [id])
+  approvedByAdminId String?           @map("approved_by_admin_id")
+
+  @@map("users")
+}
+
+model PhoneNumber {
+  id                  String              @id @default(cuid())
+  e164Number          String              @unique @map("e164_number")
+  countryCode         String              @map("country_code")
+  nationalNumber      String              @map("national_number")
+  displayLabel        String?             @map("display_label")
+  category            CallerCategory      @default(UNKNOWN)
+  spamScore           Int                 @default(10) @map("spam_score")
+  riskLevel           RiskLevel           @default(SAFE) @map("risk_level")
+  confidenceScore     Int                 @default(50) @map("confidence_score")
+  isVerified          Boolean             @default(false) @map("is_verified")
+  verificationType    VerificationType    @default(NONE) @map("verification_type")
+  sourceType          SourceType          @default(UNKNOWN) @map("source_type")
+  sourceReference     String?             @map("source_reference")
+  totalReports        Int                 @default(0) @map("total_reports")
+  spamReports         Int                 @default(0) @map("spam_reports")
+  fraudReports        Int                 @default(0) @map("fraud_reports")
+  scamReports         Int                 @default(0) @map("scam_reports")
+  safeReports         Int                 @default(0) @map("safe_reports")
+  lastReportedAt      DateTime?           @map("last_reported_at")
+  adminOverrideStatus AdminOverrideStatus @default(NONE) @map("admin_override_status")
+  disputeStatus       DisputeStatus       @default(NONE) @map("dispute_status")
+  lookupCount         Int                 @default(0) @map("lookup_count")
+  createdAt           DateTime            @default(now()) @map("created_at")
+  updatedAt           DateTime            @updatedAt @map("updated_at")
+
+  reports          NumberReport[]
+  blockedBy        BlockedNumber[]
+  disputes         Dispute[]
+  lookupLogs       LookupLog[]
+  businessProfiles BusinessProfile[]
+
+  @@index([countryCode])
+  @@index([spamScore])
+  @@index([riskLevel])
+  @@index([category])
+  @@index([isVerified])
+  @@map("phone_numbers")
+}
+
+model NumberReport {
+  id                    String       @id @default(cuid())
+  phoneNumberId         String       @map("phone_number_id")
+  reportedByUserId      String       @map("reported_by_user_id")
+  approvedByUserId      String?      @map("approved_by_user_id")
+  reportType            ReportType   @map("report_type")
+  labelSuggestion       String?      @map("label_suggestion")
+  businessNameSuggestion String?     @map("business_name_suggestion")
+  notes                 String?
+  city                  String?
+  state                 String?
+  country               String?
+  language              String?      @default("en")
+  moneyRequested        Boolean      @default(false) @map("money_requested")
+  otpRequested          Boolean      @default(false) @map("otp_requested")
+  paymentLinkRequested  Boolean      @default(false) @map("payment_link_requested")
+  threatUsed            Boolean      @default(false) @map("threat_used")
+  reportWeight          Float        @default(1.0) @map("report_weight")
+  status                ReportStatus @default(PENDING)
+  createdAt             DateTime     @default(now()) @map("created_at")
+
+  phoneNumber  PhoneNumber @relation(fields: [phoneNumberId], references: [id])
+  reportedBy   User        @relation(fields: [reportedByUserId], references: [id])
+  approvedBy   User?       @relation("ApprovedBy", fields: [approvedByUserId], references: [id])
+
+  @@unique([phoneNumberId, reportedByUserId, reportType])
+  @@index([phoneNumberId])
+  @@index([reportedByUserId])
+  @@index([status])
+  @@map("number_reports")
+}
+
+model BusinessProfile {
+  id                      String                     @id @default(cuid())
+  businessName            String                     @map("business_name")
+  phoneNumberId           String                     @map("phone_number_id")
+  category                CallerCategory             @default(BUSINESS)
+  website                 String?
+  address                 String?
+  city                    String?
+  state                   String?
+  country                 String?
+  logoUrl                 String?                    @map("logo_url")
+  verificationStatus      BusinessVerificationStatus @default(PENDING) @map("verification_status")
+  verificationDocumentUrl String?                    @map("verification_document_url")
+  claimedByUserId         String                     @map("claimed_by_user_id")
+  approvedByAdminId       String?                    @map("approved_by_admin_id")
+  createdAt               DateTime                   @default(now()) @map("created_at")
+  updatedAt               DateTime                   @updatedAt @map("updated_at")
+
+  phoneNumber   PhoneNumber @relation(fields: [phoneNumberId], references: [id])
+  claimedBy     User        @relation("ClaimedBy", fields: [claimedByUserId], references: [id])
+  approvedBy    User?       @relation("ApprovedBy", fields: [approvedByAdminId], references: [id])
+  callReasons   CallReason[]
+
+  @@index([verificationStatus])
+  @@map("business_profiles")
+}
+
+model CallReason {
+  id                  String  @id @default(cuid())
+  businessProfileId   String  @map("business_profile_id")
+  reasonTitle         String  @map("reason_title")
+  reasonDescription   String  @map("reason_description")
+  isActive            Boolean @default(true) @map("is_active")
+  createdAt           DateTime @default(now()) @map("created_at")
+
+  businessProfile BusinessProfile @relation(fields: [businessProfileId], references: [id])
+
+  @@map("call_reasons")
+}
+
+model BlockedNumber {
+  id            String   @id @default(cuid())
+  userId        String   @map("user_id")
+  phoneNumberId String   @map("phone_number_id")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  user        User        @relation(fields: [userId], references: [id])
+  phoneNumber PhoneNumber @relation(fields: [phoneNumberId], references: [id])
+
+  @@unique([userId, phoneNumberId])
+  @@map("blocked_numbers")
+}
+
+model Dispute {
+  id                String        @id @default(cuid())
+  phoneNumberId     String        @map("phone_number_id")
+  submittedByUserId String        @map("submitted_by_user_id")
+  reviewedByAdminId String?       @map("reviewed_by_admin_id")
+  disputeType       DisputeType   @map("dispute_type")
+  message           String
+  status            ReportStatus  @default(PENDING)
+  createdAt         DateTime      @default(now()) @map("created_at")
+  updatedAt         DateTime      @updatedAt @map("updated_at")
+
+  phoneNumber     PhoneNumber @relation(fields: [phoneNumberId], references: [id])
+  submittedBy     User        @relation(fields: [submittedByUserId], references: [id])
+  reviewedBy      User?       @relation("ReviewedBy", fields: [reviewedByAdminId], references: [id])
+
+  @@index([status])
+  @@map("disputes")
+}
+
+model AuditLog {
+  id          String   @id @default(cuid())
+  actorUserId String?  @map("actor_user_id")
+  action      String
+  entityType  String   @map("entity_type")
+  entityId    String   @map("entity_id")
+  metadata    Json?
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  actor User? @relation(fields: [actorUserId], references: [id])
+
+  @@index([entityType, entityId])
+  @@index([actorUserId])
+  @@map("audit_logs")
+}
+
+model LookupLog {
+  id            String   @id @default(cuid())
+  userId        String?  @map("user_id")
+  phoneNumberId String?  @map("phone_number_id")
+  lookupType    String   @default("MANUAL") @map("lookup_type")
+  rawNumber     String?  @map("raw_number")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  user        User?        @relation(fields: [userId], references: [id])
+  phoneNumber PhoneNumber? @relation(fields: [phoneNumberId], references: [id])
+
+  @@map("lookup_logs")
+}
+
+model WaitlistEntry {
+  id          String   @id @default(cuid())
+  email       String   @unique
+  phoneNumber String?  @map("phone_number")
+  country     String?
+  source      String?  @default("website")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@map("waitlist_entries")
+}
+
+model ThemePreference {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  themeName AppTheme @map("theme_name")
+  platform  Platform @default(ANDROID)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@unique([userId, platform])
+  @@map("theme_preferences")
+}
