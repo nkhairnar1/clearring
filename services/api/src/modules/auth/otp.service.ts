@@ -1,7 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { RedisService } from '../../shared/redis/redis.service';
 import { Resend } from 'resend';
-import * as nodemailer from 'nodemailer';
 
 @Injectable()
 export class OtpService {
@@ -9,29 +8,28 @@ export class OtpService {
   private readonly OTP_TTL = parseInt(process.env.OTP_EXPIRY_SECONDS ?? '300');
   private readonly isDev = process.env.NODE_ENV !== 'production';
   private readonly resend: Resend | null;
-  private readonly transporter: nodemailer.Transporter | null;
+  private readonly brevoApiKey: string | null;
+  private readonly brevoSender: string;
 
   constructor(private readonly redis: RedisService) {
     const resendKey = process.env.RESEND_API_KEY;
-    const user = process.env.EMAIL_USER;
-    const pass = process.env.EMAIL_PASS;
-    const host = process.env.EMAIL_HOST;
-    const port = parseInt(process.env.EMAIL_PORT ?? '587');
+    const brevoKey = process.env.BREVO_API_KEY;
 
-    if (resendKey) {
+    if (brevoKey) {
+      this.brevoApiKey = brevoKey;
+      this.resend = null;
+      this.brevoSender = process.env.EMAIL_USER ?? 'noreply@clearring.app';
+      this.logger.log(`Email OTP enabled via Brevo API (from: ${this.brevoSender})`);
+    } else if (resendKey) {
+      this.brevoApiKey = null;
       this.resend = new Resend(resendKey);
-      this.transporter = null;
+      this.brevoSender = '';
       this.logger.log('Email OTP enabled via Resend');
-    } else if (user && pass) {
-      this.resend = null;
-      this.transporter = host
-        ? nodemailer.createTransport({ host, port, secure: port === 465, auth: { user, pass } })
-        : nodemailer.createTransport({ service: 'gmail', auth: { user, pass } });
-      this.logger.log(`Email OTP enabled via ${host ?? 'gmail'} (${user})`);
     } else {
+      this.brevoApiKey = null;
       this.resend = null;
-      this.transporter = null;
-      this.logger.warn('No email provider configured — OTP will only appear in dev mode logs');
+      this.brevoSender = '';
+      this.logger.warn('No email provider configured (BREVO_API_KEY or RESEND_API_KEY required)');
     }
   }
 
@@ -57,35 +55,44 @@ export class OtpService {
   private async sendEmail(to: string, otp: string): Promise<boolean> {
     const subject = 'Your ClearRing verification code';
     const html = this.emailHtml(otp);
-    const from =
-      process.env.EMAIL_FROM ??
-      (process.env.EMAIL_USER
-        ? `ClearRing <${process.env.EMAIL_USER}>`
-        : 'ClearRing <onboarding@resend.dev>');
+
+    if (this.brevoApiKey) {
+      try {
+        const res = await fetch('https://api.brevo.com/v3/smtp/email', {
+          method: 'POST',
+          headers: {
+            'accept': 'application/json',
+            'api-key': this.brevoApiKey,
+            'content-type': 'application/json',
+          },
+          body: JSON.stringify({
+            sender: { name: 'ClearRing', email: this.brevoSender },
+            to: [{ email: to }],
+            subject,
+            htmlContent: html,
+          }),
+        });
+        if (!res.ok) {
+          const body = await res.text();
+          throw new Error(`${res.status} ${body}`);
+        }
+        this.logger.log(`OTP email sent via Brevo API to ${to}`);
+        return true;
+      } catch (err: unknown) {
+        this.logger.error(`Brevo API failed: ${err instanceof Error ? err.message : String(err)}`);
+        return false;
+      }
+    }
 
     if (this.resend) {
       try {
+        const from = 'ClearRing <onboarding@resend.dev>';
         const { error } = await this.resend.emails.send({ from, to, subject, html });
         if (error) throw new Error(error.message);
         this.logger.log(`OTP email sent via Resend to ${to}`);
         return true;
       } catch (err: unknown) {
         this.logger.error(`Resend failed: ${err instanceof Error ? err.message : String(err)}`);
-        return false;
-      }
-    }
-
-    if (this.transporter) {
-      try {
-        const sendPromise = this.transporter.sendMail({ from, to, subject, html });
-        const timeout = new Promise<never>((_, reject) =>
-          setTimeout(() => reject(new Error('SMTP timeout')), 10_000),
-        );
-        await Promise.race([sendPromise, timeout]);
-        this.logger.log(`OTP email sent via SMTP to ${to}`);
-        return true;
-      } catch (err: unknown) {
-        this.logger.error(`SMTP failed: ${err instanceof Error ? err.message : String(err)}`);
         return false;
       }
     }
@@ -97,8 +104,7 @@ export class OtpService {
     const otp = this.generateOtp();
     await this.redis.setex(this.otpKey(email), this.OTP_TTL, otp);
 
-    // Fire email in background — don't block the HTTP response.
-    // The OTP is already stored in Redis; the client just needs a fast 200.
+    // Fire email in background — OTP is already in Redis, client gets fast 200.
     this.sendEmail(email, otp).catch(() => {});
 
     if (this.isDev) {
